@@ -42,6 +42,11 @@
                                 @endif
                             </td>
                             <td>{{ $task->due_date }}</td>
+                            <td>
+                                @if($task->isCompleted == 0)
+                                <a href="{{ route('doneTask', $task->id)}}" class="btn btn-success">Mark as Completed</a>
+                                @endif
+                            </td>
                                     
                         </tr>
                         @endforeach

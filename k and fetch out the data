@@ -1,0 +1,23 @@
+[33mcommit 1fa374924cae02ab5480d3e5ade8517d7ceba9ae[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: yizhang0125 <yizhangyoong25@gmail.com>
+Date:   Thu Oct 10 11:39:53 2024 +0800
+
+    Create Controller and model, doing a function adding a task and fetch out the data
+
+[33mcommit 2a7eb930b9a77dbfd1b5c6a5ccfc7920fbe6a93e[m
+Author: yizhang0125 <yizhangyoong25@gmail.com>
+Date:   Wed Oct 9 09:57:51 2024 +0800
+
+    Create a migration
+
+[33mcommit 8b0f843c213d55a043e6a01dba71589264b284ba[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: yizhang0125 <yizhangyoong25@gmail.com>
+Date:   Tue Oct 8 13:31:25 2024 +0800
+
+    Adding layouts header and footer
+
+[33mcommit 9593ada92f5e93e5fa69d7d0985f69d57c7f065f[m
+Author: yizhang0125 <yizhangyoong25@gmail.com>
+Date:   Tue Oct 8 09:27:55 2024 +0800
+
+    Set up a fresh Laravel app
