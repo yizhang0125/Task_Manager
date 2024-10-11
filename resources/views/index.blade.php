@@ -47,6 +47,14 @@
                                 <a href="{{ route('doneTask', $task->id)}}" class="btn btn-success">Mark as Completed</a>
                                 @endif
                             </td>
+                            <td> <a href="{{ route('editTask', $task->id) }}" class="btn btn-warning btn-sm">Edit</a></td>
+                            <td><!-- Delete Task Button -->
+                            <form action="{{ route('deleteTask', $task->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
+                            </form>
+                            </td>
                                     
                         </tr>
                         @endforeach
