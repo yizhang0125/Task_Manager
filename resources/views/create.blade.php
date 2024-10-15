@@ -28,8 +28,9 @@
 
         <div class="form-group">
             <label for="due_date">Due Date:</label>
-            <input type="date" class="form-control" id="due_date" name="due_date" value="{{ old('due_date') }}" required>
+            <input type="date" class="form-control" id="due_date" name="due_date" value="{{ old('due_date') }}" min="{{ date('Y-m-d') }}" required>
         </div>
+
 
         <button type="submit" class="btn btn-primary">Create Task</button>
     </form>
