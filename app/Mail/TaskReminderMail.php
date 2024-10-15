@@ -15,19 +15,21 @@ class TaskReminderMail extends Mailable
 
     public $task;
     public $messageContent;
+
     /**
      * Create a new message instance.
      */
-    public function __construct($task,$messageContent)
+    public function __construct($task, $messageContent)
     {
         $this->task = $task;
         $this->messageContent = $messageContent;
     }
 
-    public function build(){
+    public function build()
+    {
         return $this->subject('Task Reminder Mail')
-        ->view('emails.taskReminder')
-        ->with('messageContent',$this->messageContent);
+                    ->view('emails.taskReminder') // Ensure this view file exists
+                    ->with('messageContent', $this->messageContent);
     }
 
     /**
@@ -40,7 +42,10 @@ class TaskReminderMail extends Mailable
         );
     }
 
-    
+    /**
+     * Get the message content definition.
+     */
+    // Removed this method since it's redundant for your use case
 
     /**
      * Get the attachments for the message.

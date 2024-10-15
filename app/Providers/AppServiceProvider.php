@@ -4,9 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schedule;
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use App\Models\Tasks;
-use Illumnate\Support\Facades\Mail;
 use App\Mail\TaskReminderMail;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,32 +24,33 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Schedule::call(function () {
-            $tasksDueSoon = Tasks::where('due_date', '<=', Carbon::now()->addDays(2))
-                ->where('due_date', '>', Carbon::now())
-                ->where('isCompleted', false)
-                ->get();
+        Schedule::call(function(){
 
-            $tasksOverdue = Tasks::where('due_date', '<', Carbon::now())
-                ->where('isCompleted', false)
-                ->get();
+            // Send email to users who have tasks due in 3 days
+            $tasksDueSoon = Tasks::where('due_date','<=',Carbon::now()->addDays(3))
+                                    ->where('due_date','>',Carbon::now())
+                                    ->where('isCompleted',false)
+                                    ->get();
 
-            foreach ($tasksDueSoon as $task) {
-                $messageContent = 'Your Task "{$task->title}" is due on "{$task->due_date}".
-                Please complete it as soon as possible.';
-                Mail::to('yizhangyoong25@gmail.com')
+            //Send email to users who have tasks is Overdue
+            $tasksOverdue = Tasks::where('due_date','<',Carbon::now())
+                                    ->where('isCompleted',false)
+                                    ->get();
+
+            foreach ($tasksDueSoon as $task){
+                $messageContent = "Your task \"{$task->title}\" is due on  {$task->due_date}.
+                Please complete it soon!";
+                Mail::to('tanshiyang0621@gmail.com')
                 ->send(new TaskReminderMail($task,$messageContent));
             }
 
-            foreach ($taskOverdue as $task) {
-                $messageContent = 'Your Task "{$task->title}" is due on "{$task->due_date}".
-                Please complete it as soon as possible.';
-                Mail::to('yizhangyoong25@gmail.com')
-                ->send(new TaskReminderMail($task,$messageContent));
+            foreach ($tasksOverdue as $task) {
+                $messageContent = "Your task \"{$task->title}\" was due on {$task->due_date}.
+                Please complete it soon!"; // 使用双引号
+                Mail::to('tanshiyang0621@gmail.com')
+                    ->send(new TaskReminderMail($task, $messageContent));
             }
 
-
-   })->everyMinute();
-
-}
+        })->everyMinute();
+    }
 }
